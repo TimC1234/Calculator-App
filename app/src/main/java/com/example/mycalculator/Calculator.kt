@@ -15,33 +15,66 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-public fun calc() {
-//    Text("Hello")
+fun calc() {
 
     //Spacer(modifier = Modifier.width(20.dp))
     Column(
         modifier = Modifier.fillMaxSize(),
-        //verticalArrangement = Arrangement.Center,
-        //horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         // Here all the UI elements will be stacked below each other
         //Text("Calculator App", style = MaterialTheme.typography.headlineLarge)
 
         Row() {
-            //Text("Hello")
             Button(onClick = {}) {
                 Text("7")
             }
+            Button(onClick = {}) {
+                Text("8")
+            }
+            Button(onClick = {}) {
+                Text("9")
+            }
+            Button(onClick = {}) {
+                Text("Del")
+            }
+            Button(onClick = {}) {
+                Text("Clear")
+            }
+
         }
         Row() {
             Button(onClick = {}) {
                 Text("4")
             }
+            Button(onClick = {}) {
+                Text("5")
+            }
+            Button(onClick = {}) {
+                Text("6")
+            }
+            Button(onClick = {}) {
+                Text("x")
+            }
+            Button(onClick = {}) {
+                Text("/")
+            }
         }
         Row() {
             Button(onClick = {}) {
                 Text("1")
+            }
+            Button(onClick = {}) {
+                Text("2")
+            }
+            Button(onClick = {}) {
+                Text("3")
+            }
+            Button(onClick = {}) {
+                Text("+")
+            }
+            Button(onClick = {}) {
+                Text("-")
             }
         }
 
@@ -49,89 +82,22 @@ public fun calc() {
             Button(onClick = {}) {
                 Text("0")
             }
-        }
-
-    }
-
-    //Spacer(modifier = Modifier.width(20.dp))
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        //verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        // Here all the UI elements will be stacked below each other
-        //Text("Calculator App", style = MaterialTheme.typography.headlineLarge)
-
-        Row() {
-            //Text("Hello")
-            Button(onClick = {}) {
-                Text("8")
-            }
-        }
-        Row() {
-            Button(onClick = {}) {
-                Text("5")
-            }
-        }
-        Row() {
-            Button(onClick = {}) {
-                Text("2")
-            }
-        }
-        Row() {
             Button(onClick = {}) {
                 Text(".")
             }
-        }
-
-    }
-
-    //Spacer(modifier = Modifier.width(20.dp))
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        //verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.End
-    ) {
-
-        // Here all the UI elements will be stacked below each other
-        //Text("Calculator App", style = MaterialTheme.typography.headlineLarge)
-
-        Row() {
-            //Text("Hello")
-            Button(onClick = {}) {
-                Text("9")
-            }
-        }
-        Row() {
-            Button(onClick = {}) {
-                Text("6")
-            }
-        }
-        Row() {
-            Button(onClick = {}) {
-                Text("3")
-            }
-        }
-        Row() {
             Button(onClick = {}) {
                 Text("=")
             }
+            Button(onClick = {}) {
+                Text("(")
+            }
+            Button(onClick = {}) {
+                Text(")")
+            }
         }
 
     }
 
-//    Column() {
-//        Text("A")
-//    }
-//
-//    Column() {
-//        Text("B")
-//    }
-//
-//    Column() {
-//        Text("C")
-//    }
+
+
 }
