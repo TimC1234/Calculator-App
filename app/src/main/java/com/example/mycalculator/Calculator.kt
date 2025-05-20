@@ -27,6 +27,27 @@ import androidx.compose.runtime.setValue
 //fun displayResult(input: String) {
 //    Text("Result: $input")
 //}
+
+fun calculateResult(input: String, operators: String): String {
+
+//    var currentOperator = operators.first()
+//    var currentOperatorIndex = input.indexOf(currentOperator)
+
+    var currentOperator = ""
+    var currentOperatorIndex = 0
+    var result = 0
+
+    if (operators.isEmpty()) {
+        return input
+    }
+
+    while (operators.isNotEmpty()) {
+
+    }
+
+    return ""
+}
+
 @Composable
 fun calc() {
 
@@ -171,7 +192,11 @@ fun calc() {
             modifier = Modifier.fillMaxWidth().height(80.dp),
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Button(onClick = {input += 0}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                if (input.isNotEmpty())
+                    input += 0
+                             },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("0")
             }
             Button(onClick = {input += "."}, modifier = Modifier.weight(1f).fillMaxHeight()) {
