@@ -28,56 +28,108 @@ import androidx.compose.runtime.setValue
 //    Text("Result: $input")
 //}
 
+//fun calculateResult(input: String, operators: String): String {
+//
+////    var currentOperator = operators.first()
+////    var currentOperatorIndex = input.indexOf(currentOperator)
+//    var ops = operators
+//    var currentOperator = ""             // determines what the left most operator is
+//    var currentOperatorIndex = 0
+//    var nextOperator = ""
+//    var nextOpInd = 0
+//
+//    var result = 0                       // final result
+//    var op1Str = ""                      // left hand side operand
+//    var op2Str = ""                      // right hand side operand
+//    var op1Int = 0
+//    var op2Int = 0
+//
+//    var start = 0                        // current index position
+//
+//    if (ops.isEmpty()) {
+//        return input
+//    }
+//
+//    val length = ops.length
+//    while (ops.isNotEmpty()) {
+//        currentOperator = ops.first().toString()
+//        currentOperatorIndex = input.indexOf(currentOperator, start)
+//
+//
+//
+//
+//        op1Str = input.substring(start, currentOperatorIndex)
+//        op2Str = input.substring(currentOperatorIndex + 1)
+//
+//        op1Int = op1Str.toInt()
+//        op2Int = op2Str.toInt()
+//
+//        ops = ops.drop(1)
+//        nextOperator = ops.first().toString()
+//        nextOpInd = input.indexOf(nextOperator, )
+//
+//        if (currentOperator == "/" && op2Int == 0) {
+//            return "Math Error: Division by 0"
+//        }
+//
+//        result = when (currentOperator) {
+//            "+" -> op1Int + op2Int
+//            "-" -> op1Int - op2Int
+//            "x" -> op1Int * op2Int
+//            "/" -> op1Int / op2Int
+//            else -> 0
+//        }
+//
+//
+//        break
+//    }
+//
+//    return result.toString()
+//}
+
 fun calculateResult(input: String, operators: String): String {
+    var expr = input
+    var ops = operators
 
-//    var currentOperator = operators.first()
-//    var currentOperatorIndex = input.indexOf(currentOperator)
+    while (ops.isNotEmpty()) {
+        val op = ops.first().toString()
+        val opIndex = expr.indexOf(op)
 
-    var currentOperator = ""             // determines what the left most operator is
-    var currentOperatorIndex = 0
-    var nextOperator = ""
-    var nextOpInd = 0
+        if (opIndex == -1) return expr
 
-    var result = 0                       // final result
-    var op1Str = ""                      // left hand side operand
-    var op2Str = ""                      // right hand side operand
-    var op1Int = 0
-    var op2Int = 0
+        // Find left operand
+        val left = expr.substring(0, opIndex)
+        val right = expr.substring(opIndex + 1)
 
-    var start = 0                        // current index position
+        // If there's another operator after this one, trim the right side
+        val nextOps = listOf("+", "-", "x", "/")
+        val nextOpIndex = right.indexOfAny(nextOps)
 
-    if (operators.isEmpty()) {
-        return input
-    }
+        val op1Str = left
+        val op2Str = if (nextOpIndex != -1) right.substring(0, nextOpIndex) else right
+        val remaining = if (nextOpIndex != -1) right.substring(nextOpIndex) else ""
 
-    val length = operators.length
-    while (operators.isNotEmpty()) {
-        currentOperator = operators.first().toString()
-        currentOperatorIndex = input.indexOf(currentOperator, start)
-        op1Str = input.substring(start, currentOperatorIndex)
-        op2Str = input.substring(currentOperatorIndex + 1)
+        val op1 = op1Str.toIntOrNull() ?: return "Error"
+        val op2 = op2Str.toIntOrNull() ?: return "Error"
 
-        op1Int = op1Str.toInt()
-        op2Int = op2Str.toInt()
+        if (op == "/" && op2 == 0) return "Math Error: Division by 0"
 
-        if (currentOperator == "/" && op2Int == 0) {
-            return "Math Error: Division by 0"
+        val result = when (op) {
+            "+" -> op1 + op2
+            "-" -> op1 - op2
+            "x" -> op1 * op2
+            "/" -> op1 / op2
+            else -> return "Error"
         }
 
-        result = when (currentOperator) {
-            "+" -> op1Int + op2Int
-            "-" -> op1Int - op2Int
-            "x" -> op1Int * op2Int
-            "/" -> op1Int / op2Int
-            else -> 0
-        }
-
-
-        break
+        // Build new expression string
+        expr = result.toString() + remaining
+        ops = ops.drop(1)
     }
 
-    return result.toString()
+    return expr
 }
+
 
 @Composable
 fun calc() {
