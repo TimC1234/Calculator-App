@@ -66,7 +66,11 @@ fun calc() {
             Button(onClick = {input = input.dropLast(1)}, modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("Del")
             }
-            Button(onClick = {input = ""}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                input = ""
+                hasOperated = false
+                             },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("AC")
             }
 
@@ -85,19 +89,26 @@ fun calc() {
                 Text("6")
             }
             Button(onClick = {
-                if (hasOperated)
+                if (input.isNotEmpty()) {
+                    val lastChar = input.last()
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
                     input = input.dropLast(1)
+                }
                 input += "x"
-                hasOperated = true
+                //hasOperated = true
                              },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("x")
             }
             Button(onClick = {
-                if (hasOperated)
-                    input = input.dropLast(1)
+                val length = input.length - 1
+                if (input.isNotEmpty()) {
+                    val lastChar = input.last()
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+                        input = input.dropLast(1)
+                }
                 input += "/"
-                hasOperated = true
+                //hasOperated = true
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("/")
@@ -117,19 +128,27 @@ fun calc() {
                 Text("3")
             }
             Button(onClick = {
-                if (hasOperated)
-                    input = input.dropLast(1)
+                val length = input.length - 1
+                if (input.isNotEmpty()) {
+                    val lastChar = input.last()
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+                        input = input.dropLast(1)
+                }
                 input += "+"
-                hasOperated = true
+                //hasOperated = true
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("+")
             }
             Button(onClick = {
-                if (hasOperated)
-                    input = input.dropLast(1)
+                val length = input.length - 1
+                if (input.isNotEmpty()) {
+                    val lastChar = input.last()
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+                        input = input.dropLast(1)
+                }
                 input += "-"
-                hasOperated = true
+                //hasOperated = true
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("-")
