@@ -33,19 +33,50 @@ fun calculateResult(input: String, operators: String): String {
 //    var currentOperator = operators.first()
 //    var currentOperatorIndex = input.indexOf(currentOperator)
 
-    var currentOperator = ""
+    var currentOperator = ""             // determines what the left most operator is
     var currentOperatorIndex = 0
-    var result = 0
+    var nextOperator = ""
+    var nextOpInd = 0
+
+    var result = 0                       // final result
+    var op1Str = ""                      // left hand side operand
+    var op2Str = ""                      // right hand side operand
+    var op1Int = 0
+    var op2Int = 0
+
+    var start = 0                        // current index position
 
     if (operators.isEmpty()) {
         return input
     }
 
+    val length = operators.length
     while (operators.isNotEmpty()) {
+        currentOperator = operators.first().toString()
+        currentOperatorIndex = input.indexOf(currentOperator, start)
+        op1Str = input.substring(start, currentOperatorIndex)
+        op2Str = input.substring(currentOperatorIndex + 1)
 
+        op1Int = op1Str.toInt()
+        op2Int = op2Str.toInt()
+
+        if (currentOperator == "/" && op2Int == 0) {
+            return "Math Error: Division by 0"
+        }
+
+        result = when (currentOperator) {
+            "+" -> op1Int + op2Int
+            "-" -> op1Int - op2Int
+            "x" -> op1Int * op2Int
+            "/" -> op1Int / op2Int
+            else -> 0
+        }
+
+
+        break
     }
 
-    return ""
+    return result.toString()
 }
 
 @Composable
@@ -202,7 +233,11 @@ fun calc() {
             Button(onClick = {input += "."}, modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text(".")
             }
-            Button(onClick = {input += "="}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                //input += "="
+                output = calculateResult(input, operators)
+                             },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("=")
             }
             Button(onClick = {input += "("}, modifier = Modifier.weight(1f).fillMaxHeight()) {
