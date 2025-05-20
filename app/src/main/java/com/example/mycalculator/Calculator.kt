@@ -30,10 +30,8 @@ import androidx.compose.runtime.setValue
 @Composable
 fun calc() {
 
-    //var input = ""
     var input by remember{mutableStateOf("")}
     var output by remember{mutableStateOf("")}
-    var hasOperated by remember{mutableStateOf(false)}
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -45,9 +43,6 @@ fun calc() {
         Spacer(modifier = Modifier.height(50.dp))
         Text("Output: $output", style = MaterialTheme.typography.headlineLarge)
 
-
-        // Here all the UI elements will be stacked below each other
-        //Text("Calculator App", style = MaterialTheme.typography.headlineLarge)
         Spacer(modifier = Modifier.height(200.dp))
         Row(
             modifier = Modifier.fillMaxWidth().height(80.dp),
@@ -68,7 +63,6 @@ fun calc() {
             }
             Button(onClick = {
                 input = ""
-                hasOperated = false
                              },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("AC")
@@ -92,10 +86,9 @@ fun calc() {
                 if (input.isNotEmpty()) {
                     val lastChar = input.last()
                     if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
-                    input = input.dropLast(1)
+                        input = input.dropLast(1)
                 }
                 input += "x"
-                //hasOperated = true
                              },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("x")
@@ -108,7 +101,6 @@ fun calc() {
                         input = input.dropLast(1)
                 }
                 input += "/"
-                //hasOperated = true
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("/")
@@ -135,7 +127,6 @@ fun calc() {
                         input = input.dropLast(1)
                 }
                 input += "+"
-                //hasOperated = true
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("+")
@@ -148,7 +139,6 @@ fun calc() {
                         input = input.dropLast(1)
                 }
                 input += "-"
-                //hasOperated = true
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("-")
