@@ -32,6 +32,8 @@ fun calc() {
 
     //var input = ""
     var input by remember{mutableStateOf("")}
+    var output by remember{mutableStateOf("")}
+    var hasOperated by remember{mutableStateOf(false)}
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -39,8 +41,11 @@ fun calc() {
 
         Spacer(modifier = Modifier.height(100.dp))
         Text("Input: $input", style = MaterialTheme.typography.headlineLarge)
+
         Spacer(modifier = Modifier.height(50.dp))
-        Text("Output: $input", style = MaterialTheme.typography.headlineLarge)
+        Text("Output: $output", style = MaterialTheme.typography.headlineLarge)
+
+
         // Here all the UI elements will be stacked below each other
         //Text("Calculator App", style = MaterialTheme.typography.headlineLarge)
         Spacer(modifier = Modifier.height(200.dp))
@@ -79,10 +84,22 @@ fun calc() {
             Button(onClick = {input += 6}, modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("6")
             }
-            Button(onClick = {input += "x"}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                if (hasOperated)
+                    input = input.dropLast(1)
+                input += "x"
+                hasOperated = true
+                             },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("x")
             }
-            Button(onClick = {input += "/"}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                if (hasOperated)
+                    input = input.dropLast(1)
+                input += "/"
+                hasOperated = true
+            },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("/")
             }
         }
@@ -99,10 +116,22 @@ fun calc() {
             Button(onClick = {input += 3}, modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("3")
             }
-            Button(onClick = {input += "+"}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                if (hasOperated)
+                    input = input.dropLast(1)
+                input += "+"
+                hasOperated = true
+            },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("+")
             }
-            Button(onClick = {input += "-"}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                if (hasOperated)
+                    input = input.dropLast(1)
+                input += "-"
+                hasOperated = true
+            },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("-")
             }
         }
