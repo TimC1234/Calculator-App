@@ -32,6 +32,7 @@ fun calc() {
 
     var input by remember{mutableStateOf("")}
     var output by remember{mutableStateOf("")}
+    var operators by remember{mutableStateOf("")}
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -58,11 +59,19 @@ fun calc() {
             Button(onClick = {input += 9}, modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("9")
             }
-            Button(onClick = {input = input.dropLast(1)}, modifier = Modifier.weight(1f).fillMaxHeight()) {
+            Button(onClick = {
+                val lastChar = input.last()
+                if (lastChar == operators.last()) {
+                    operators = operators.dropLast(1)
+                }
+                input = input.dropLast(1)
+                             },
+                modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("Del")
             }
             Button(onClick = {
                 input = ""
+                operators = ""
                              },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("AC")
@@ -85,21 +94,28 @@ fun calc() {
             Button(onClick = {
                 if (input.isNotEmpty()) {
                     val lastChar = input.last()
-                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+                    // checks if the previous input was an operator and overwrites it if true
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/') {
                         input = input.dropLast(1)
+                        operators = operators.dropLast(1)
+                    }
                 }
+                operators += "x"
                 input += "x"
                              },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("x")
             }
             Button(onClick = {
-                val length = input.length - 1
                 if (input.isNotEmpty()) {
                     val lastChar = input.last()
-                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+                    // checks if the previous input was an operator and overwrites it if true
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/') {
                         input = input.dropLast(1)
+                        operators = operators.dropLast(1)
+                    }
                 }
+                operators += "/"
                 input += "/"
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
@@ -120,24 +136,30 @@ fun calc() {
                 Text("3")
             }
             Button(onClick = {
-                val length = input.length - 1
                 if (input.isNotEmpty()) {
                     val lastChar = input.last()
-                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+                    // checks if the previous input was an operator and overwrites it if true
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/') {
                         input = input.dropLast(1)
+                        operators = operators.dropLast(1)
+                    }
                 }
+                operators += "+"
                 input += "+"
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
                 Text("+")
             }
             Button(onClick = {
-                val length = input.length - 1
                 if (input.isNotEmpty()) {
                     val lastChar = input.last()
-                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+                    // checks if the previous input was an operator and overwrites it if true
+                    if (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/') {
                         input = input.dropLast(1)
+                        operators = operators.dropLast(1)
+                    }
                 }
+                operators += "-"
                 input += "-"
             },
                 modifier = Modifier.weight(1f).fillMaxHeight()) {
